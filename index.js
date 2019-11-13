@@ -67,7 +67,7 @@ function processLength(list, callback) {
  * should return 'barbar'.
 */
 function processLastItem(stringList, callback) {
-  return callback(stringList.pop());
+  return callback(stringList[stringList.length-1]);
 };
 
 
@@ -294,15 +294,16 @@ function counterMaker() {
  * etc
 */
 function counterMakerWithLimit(maxValue) {
-  let count = 0;
-  for(let i = 0; i < maxValue; i++){
-    function counter(){
-      return count++
-    }
-    
+  let count = -1;
+  return function counter (){
+  if(count === maxValue){
+    count = -1;
   };
-  return counter;
-}
+  return ++count;
+  }
+};
+
+
 
 /////////////// END OF CHALLENGE ///////////////
 /////////////// END OF CHALLENGE ///////////////
@@ -325,4 +326,4 @@ if (typeof exports !== 'undefined') {
   if (tallyUpDonations) { module.exports.tallyUpDonations = tallyUpDonations }
   if (counterMaker) { module.exports.counterMaker = counterMaker }
   if (counterMakerWithLimit) { module.exports.counterMakerWithLimit = counterMakerWithLimit }
-}
+};
